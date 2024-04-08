@@ -4,7 +4,7 @@
     
     date_default_timezone_set('America/Mexico_City');
     const DB_HOST = "localhost";
-    const DB_NAME = "db_petipa";
+    const DB_NAME = "db_inventariosdif";
     const DB_USER = "root";
     const DB_PASSWORD = "";
     const DB_CHARSET = "charset=utf8";

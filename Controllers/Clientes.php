@@ -18,7 +18,7 @@ class Clientes extends Controllers
             header('Location: ' . base_url() . 'dashboard');
         }
         $data['page_tag'] = "Clientes";
-        $data['page_title'] = "Clientes Petipa";
+        $data['page_title'] = "Clientes";
         $data['page_name'] = "clientes";
         $data['page_functions_js'] = "functions_clientes.js";
         $this->views->getView($this, "clientes", $data);
