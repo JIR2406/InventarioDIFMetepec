@@ -1,0 +1,45 @@
+/* Estilos para el efecto parallax */
+.parallax-container {
+    /* Asegura que el fondo se mantenga fijo mientras se hace scroll */
+    background-attachment: fixed;
+    /* Centra la imagen de fondo */
+    background-position: center;
+    /* Evita que el fondo se repita */
+    background-repeat: no-repeat;
+    /* Ajusta el tamaño del fondo para cubrir completamente el contenedor */
+    background-size: cover;
+    /* Establece la altura del contenedor al 100% de la ventana */
+    height: 100vh;
+  }
+  
+  /* Estilos para el carrusel que se mezcla con el efecto parallax */
+  .parallax-container .carousel-inner {
+    /* Establece la altura del carrusel al 100% de la ventana */
+    height: 100vh;
+  }
+  
+  .parallax-container .carousel-item {
+    /* Ajusta la altura de cada elemento del carrusel al 100% del contenedor */
+    height: 100%;
+  }
+
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 32px; /* Ajusta el tamaño del texto según sea necesario */
+    color: #333; /* Cambia el color del texto según sea necesario */
+    text-align: center;
+  }
+
+  .map-container {
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+  }
+
+  iframe {
+    width: 100%;
+    height: 400px; /* Ajusta según sea necesario */
+    border: 0;
+  }

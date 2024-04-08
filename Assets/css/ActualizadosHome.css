@@ -1,0 +1,121 @@
+h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  /* Ajusta el tamaño del texto según sea necesario */
+  color: #333;
+  /* Cambia el color del texto según sea necesario */
+  text-align: center;
+}
+
+.map-container {
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  margin: 20px auto;
+  /* Centra el contenedor horizontalmente */
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+  /* Ajusta según sea necesario */
+  border: 0;
+}
+
+.container {
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+}
+
+.square {
+position: relative;
+overflow: hidden;
+width: 450px; /* Ajusta el ancho según tu preferencia */
+height: 300px;
+margin: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s;
+}
+
+.square:hover {
+transform: scale(1.05);
+}
+
+.square img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+color: #fff;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.square:hover .overlay {
+opacity: 1;
+}
+
+.title {
+font-size: 1.5rem;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.text {
+font-size: 1rem;
+text-align: center;
+}
+
+.image-container {
+position: relative;
+overflow: hidden;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail {
+width: 100%;
+height: auto;
+transition: transform 0.3s;
+}
+
+.thumbnail:hover {
+transform: scale(1.05);
+}
+
+.overlay {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.image-container:hover .overlay {
+opacity: 1;
+}
+
+.overlay-content {
+text-align: center;
+color: #fff;
+}
+
+.card-link:hover {
+transform: scale(1.05); /* Escalar la tarjeta al pasar el ratón sobre ella */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón sobre ella */
+}
