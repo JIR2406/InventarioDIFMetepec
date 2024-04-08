@@ -5,7 +5,7 @@
             alt="User Image">
         <div>
             <p class="app-sidebar__user-name">
-                <?= $_SESSION['userData']['nombres'].' '.$_SESSION['userData']['apellidos']; ?>
+                <?= $_SESSION['userData']['nombres'].' '.substr($_SESSION['userData']['apellidos'], 0, strpos($_SESSION['userData']['apellidos'], ' ')); ?>
             </p>
             <p class="app-sidebar__user-designation">
                 <?= $_SESSION['userData']['nombrerol']; ?>
