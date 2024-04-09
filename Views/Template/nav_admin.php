@@ -65,9 +65,9 @@
         <?php } ?>
         <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
             <li>
-                <a class="app-menu__item" href="<?= base_url(); ?>estadisticas">
+                <a class="app-menu__item" href="<?= base_url(); ?>modulos">
                     <i class="app-menu__icon fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="app-menu__label">Estadisticas</span>
+                    <span class="app-menu__label">Modulos</span>
                 </a>
             </li>
         <?php } ?>

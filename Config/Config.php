@@ -1,5 +1,4 @@
 <?php
-    //define("BASE_URL","http://localhost/tienda_virtual/");
     const BASE_URL ="http://localhost/InventariosDIFMetepec/";
     
     date_default_timezone_set('America/Mexico_City');
@@ -17,8 +16,8 @@
     //const VIEWS = "Views/";
 
 	//Datos envio de correo
-	const NOMBRE_REMITENTE = "Administración petipa";
-	const EMAIL_REMITENTE = "general@petipa.com";
-	const NOMBRE_EMPESA = "Petipa";
-	const WEB_EMPRESA = "www.petipa.com";
+	const NOMBRE_REMITENTE = "Administración";
+	const EMAIL_REMITENTE = "general@metepec.com";
+	const NOMBRE_EMPESA = "Metepec";
+	const WEB_EMPRESA = "www.inventariosMetepec.com";
 ?>
