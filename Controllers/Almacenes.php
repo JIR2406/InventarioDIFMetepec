@@ -1,6 +1,6 @@
 <?php
 
-class Modulos extends Controllers
+class Almacenes extends Controllers
 {
 	public function __construct()
 	{
@@ -12,17 +12,17 @@ class Modulos extends Controllers
 		getPermisos(2);
 	}
 
-	public function modulos()
+	public function almacenes()
 	{
 		if (empty($_SESSION['permisosMod']['r'])) {
 			header('Location: ' . base_url() . 'dashboard');
 		}
 		$data['page_id'] = 1;
-		$data['page_tag'] = "Modulos";
-		$data['page_title'] = "Modulos";
-		$data['page_name'] = "Modulos";
-		$data['page_functions_js'] = "functions_modulos";
-		$this->views->getView($this, "modulos", $data);
+		$data['page_tag'] = "Almacenes";
+		$data['page_title'] = "Almacenes";
+		$data['page_name'] = "Almacenes";
+		//$data['page_functions_js'] = "functions_modulos";
+		$this->views->getView($this, "Almacenes", $data);
 	}
 
 	public function setModulo()
