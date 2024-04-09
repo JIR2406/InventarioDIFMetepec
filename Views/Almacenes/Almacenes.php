@@ -28,8 +28,9 @@ getModal('modalModulos', $data);?>
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Titulo</th>
+                    <th>Nombre</th>
                     <th>Descripción</th>
+                    <th>Tipo</th>
                     <th>Status</th>
                     <th>Acciones</th>
                   </tr>

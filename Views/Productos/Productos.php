@@ -24,13 +24,12 @@
                     <table class="table table-hover table-bordered" id="tableProductos">
                       <thead>
                         <tr>
-                          <th>Articulo</th>
+                          <th>ID</th>
+                          <th>Nombre</th>
                           <th>Descripción</th>
                           <th>Categoria</th>
-                          <th>Marca</th>
-                          <th>Fabricante</th>
-                          <th>Impuesto</th>
-                          <th>Fotos de referencia</th>
+                          <th>Unidades</th>
+                          <th>Almacen</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
