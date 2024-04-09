@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-04-2024 a las 01:11:06
+-- Tiempo de generación: 09-04-2024 a las 01:29:45
 -- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.13
 
@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int NOT NULL,
   PRIMARY KEY (`idalmacen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,6 +166,7 @@ INSERT INTO `persona` (`idpersona`, `indentificacion`, `nombres`, `apellidos`, `
 DROP TABLE IF EXISTS `producto`;
 CREATE TABLE IF NOT EXISTS `producto` (
   `idproducto` bigint NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `categoriaid` bigint NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
