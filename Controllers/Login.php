@@ -39,7 +39,7 @@ class Login extends Controllers
 					if ($arrData['status'] == 1) {
 						$_SESSION['idUser'] = $arrData['idpersona'];
 						$_SESSION['login'] = true;
-						$_SESSION['timeout'] = true;
+						$_SESSION['timeout'] = false;
 						$_SESSION['inicio'] = time();
 						$aux = $this->model->sessionLogin($arrData['idpersona']);
 						$arrResponse = array('status' => true, 'msg' => 'ok');

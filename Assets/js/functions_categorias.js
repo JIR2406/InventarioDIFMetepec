@@ -195,8 +195,8 @@ function fntViewInfo(idcategoria) {
 
 function fntDelCategoria(idCategoria) {
     swal({
-        title: "Eliminar Usuario",
-        text: "¿Realmente quiere eliminar el Usuario?",
+        title: "Eliminar Categoria",
+        text: "¿Realmente quiere eliminar la Categoria?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
