@@ -1,6 +1,6 @@
 <?php
 headerAdmin($data); 
-getModal('modalModulos', $data);?>
+getModal('modalAlmacenes', $data);?>
 <main class="app-content">
     <div class="app-title">
       <div>
@@ -14,7 +14,7 @@ getModal('modalModulos', $data);?>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item"><a href="<?= base_url(); ?>modulos">
+        <li class="breadcrumb-item"><a href="<?= base_url(); ?>almacenes">
             <?= $data['page_title'] ?>
           </a></li>
       </ul>
@@ -24,7 +24,7 @@ getModal('modalModulos', $data);?>
         <div class="tile">
           <div class="tile-body">
             <div class="table-responsive">
-              <table class="table table-hover table-bordered" id="tableModulos">
+              <table class="table table-hover table-bordered" id="tableAlmacenes">
                 <thead>
                   <tr>
                     <th>ID</th>

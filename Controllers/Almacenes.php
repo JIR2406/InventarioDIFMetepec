@@ -21,14 +21,14 @@ class Almacenes extends Controllers
 		$data['page_tag'] = "Almacenes";
 		$data['page_title'] = "Almacenes";
 		$data['page_name'] = "Almacenes";
-		//$data['page_functions_js'] = "functions_modulos";
+		$data['page_functions_js'] = "functions_almacenes";
 		$this->views->getView($this, "Almacenes", $data);
 	}
 
-	public function setModulo()
+	public function setAlmacen()
 	{
 		if ($_POST) {
-
+/*
 			if (empty($_POST['txtTitulo']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus'])) {
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			} else {
@@ -64,15 +64,16 @@ class Almacenes extends Controllers
 				}
 			}
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			*/
 		}
 		die();
 	}
 
-	public function getModulos()
+	public function getAlmacenes()
 	{
 		if ($_SESSION['permisosMod']['r']) {
 	
-			$arrData = $this->model->selectModulos();
+			$arrData = $this->model->selectAlmacenes();
 
 			for ($i = 0; $i < count($arrData); $i++) {
 

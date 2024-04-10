@@ -9,16 +9,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="formModulo" name="formModulo" class="form-horizontal">
+        <form id="formAlmacen" name="formModulo" class="form-horizontal">
           <input type="hidden" id="idModulo" name="idModulo" value="">
           <p class="text-primary">Todos los campos son obligatorios.</p>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="txtT">Título</label>
+              <label for="txtT">Nombre</label>
               <input type="text" class="form-control valid validText" id="txtTitulo" name="txtTitulo" required="">
             </div>
             <div class="form-group col-md-6">
               <label for="txtDescripcion">Descripción</label>
+              <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="txtT">Tipo</label>
+              <input type="text" class="form-control valid validText" id="txtTitulo" name="txtTitulo" required="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="txtDescripcion">Dirección</label>
               <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="">
             </div>
           </div>
