@@ -32,12 +32,12 @@ class Almacenes extends Controllers
 			if (empty($_POST['txtTitulo']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus'])) {
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			} else {
-				$idModulo = intval($_POST['idModulo']);
+				$idalmacen = intval($_POST['idalmacen']);
 				$strTitulo = strClean($_POST['txtTitulo']);
 				$strDescripcion = ucwords(strClean($_POST['txtDescripcion']));
 				$intStatus = intval(strClean($_POST['listStatus']));
 				$request_user = false;
-				if ($idModulo == 0) {
+				if ($idalmacen == 0) {
 					if ($_SESSION['permisosMod']['w']) {
 					$request_user = $this->model->insertModulo($strTitulo,
 						$strDescripcion,
@@ -46,7 +46,7 @@ class Almacenes extends Controllers
 					}
 				} else {
 					if ($_SESSION['permisosMod']['u']) {
-					$request_user = $this->model->updateModulo($idModulo,
+					$request_user = $this->model->updateModulo($idalmacen,
 						$strTitulo,
 						$strDescripcion,
 						$intStatus);
@@ -89,21 +89,21 @@ class Almacenes extends Controllers
 				}
 
 				if ($_SESSION['permisosMod']['r']) {
-					$btnView = '<button class="btn btn-info btn-sm btnViewModulo" onClick="fntViewModulo(' . $arrData[$i]['idmodulo'] . ')" title="Ver modulo"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm btnViewModulo" onClick="fntViewModulo(' . $arrData[$i]['idalmacen'] . ')" title="Ver modulo"><i class="far fa-eye"></i></button>';
 				}
 				if ($_SESSION['permisosMod']['u']) {
 					if (
 						($_SESSION['idUser'] == 22 and $_SESSION['userData']['idrol'] == 1)
 						|| ($_SESSION['userData']['idrol'] == 1)
 					) {
-						$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditModulo(' . $arrData[$i]['idmodulo'] . ')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditModulo(' . $arrData[$i]['idalmacen'] . ')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
 					} else {
 						$btnEdit = '<button class="btn btn-secondary  btn-sm btnEditUsuario" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
 					}
 				}
 				if ($_SESSION['permisosMod']['d']) {
 					
-						$btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelModulo(' . $arrData[$i]['idmodulo'] . ')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
+						$btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelModulo(' . $arrData[$i]['idalmacen'] . ')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">
 					' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '				
@@ -114,12 +114,12 @@ class Almacenes extends Controllers
 		die();
 	}
 
-	public function getModulo(int $idmodulo)
+	public function getModulo(int $idalmacen)
 	{
 		if ($_SESSION['permisosMod']['r']) {
-			$idModulo = intval($idmodulo);
-			if ($idModulo > 0) {
-				$arrData = $this->model->selectModulo($idModulo);
+			$idalmacen = intval($idalmacen);
+			if ($idalmacen > 0) {
+				$arrData = $this->model->selectModulo($idalmacen);
 				if (empty($arrData)) {
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 				} else {
@@ -133,8 +133,8 @@ class Almacenes extends Controllers
 
 	public function delModulo($intID)
 	{
-			$intIdmodulo = intval($intID);
-			$requestDelete = $this->model->deleteModulo($intIdmodulo);
+			$intidalmacen = intval($intID);
+			$requestDelete = $this->model->deleteModulo($intidalmacen);
 			if ($requestDelete) {
 				$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario');
 			} else {

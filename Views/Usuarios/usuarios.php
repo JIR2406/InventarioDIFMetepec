@@ -33,6 +33,7 @@ getModal('modalUsuarios', $data);?>
                     <th>Email</th>
                     <th>Teléfono</th>
                     <th>Rol</th>
+                    <th>Almacen</th>
                     <th>Status</th>
                     <th>Acciones</th>
                   </tr>

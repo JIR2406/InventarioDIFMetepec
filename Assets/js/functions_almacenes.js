@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "asc"]]
     });
 
+    /*
     var formModulo = document.querySelector("#formModulo");
     formModulo.onsubmit = function (e) {
         e.preventDefault();
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-    }
+    }*/
 }, false);
 
 

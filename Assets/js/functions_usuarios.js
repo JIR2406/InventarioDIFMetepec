@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "email_user" },
             { "data": "telefono" },
             { "data": "nombrerol" },
+            { "data": "idalmacen" },
             { "data": "status" },
             { "data": "options" }
         ],

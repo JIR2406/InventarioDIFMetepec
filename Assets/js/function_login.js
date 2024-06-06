@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 request.onreadystatechange = function () {
                     if (request.readyState != 4) return;
                     if (request.status == 200) {
+                        console.log(request);
                         var objData = JSON.parse(request.responseText);
                         if (objData.status) {
                             window.location = base_url + 'dashboard';

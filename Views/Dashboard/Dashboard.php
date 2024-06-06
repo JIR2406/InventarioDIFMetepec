@@ -15,12 +15,12 @@
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <div class="tile-body">Create a beautiful dashboard</div>
+        <div class="tile-body"></div>
         <?php
-        echo dep($_SESSION['idUser']);
-        echo dep($_SESSION['userData']);
-        echo dep($_SESSION['permisos']);
-        echo dep($_SESSION['permisosMod']);
+        //echo dep($_SESSION['idUser']);
+        //echo dep($_SESSION['userData']);
+        //echo dep($_SESSION['permisos']);
+        //echo dep($_SESSION['permisosMod']);
         ?>
       </div>
     </div>

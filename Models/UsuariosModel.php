@@ -65,7 +65,7 @@ class UsuariosModel extends Mysql
 		if ($_SESSION['idUser'] != 22) {
 			$admin = "and p.idpersona !=22";
 		}
-		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.status,r.nombrerol 
+		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.status,p.idalmacen,r.nombrerol 
 					FROM persona p 
 					INNER JOIN rol r
 					ON p.rolid = r.idrol
@@ -76,7 +76,7 @@ class UsuariosModel extends Mysql
 	public function selectUsuario(int $idpersona)
 	{
 		$this->intIdUsuario = $idpersona;
-		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.rfc,p.nombrefical,p.direccionfiscal,r.idrol,r.nombrerol,p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
+		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.idalmacen,r.idrol,r.nombrerol,p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
 					FROM persona p
 					INNER JOIN rol r
 					ON p.rolid = r.idrol
