@@ -5,8 +5,6 @@ class Conexion{
 	public function __construct(){
 		$connectionString = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";".DB_CHARSET;
 		try{
-		    //$this->conect = new PDO($connectionString, $this->user, $this->password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
-			//
 			$this->conect = new PDO($connectionString, DB_USER, DB_PASSWORD);
 			$this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    //echo "conexión exitosa";

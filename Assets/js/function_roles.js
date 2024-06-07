@@ -148,7 +148,7 @@ function fntDelRol() {
         btnDelRol.addEventListener('click', function () {
             var idrol = this.getAttribute("rl");
             swal({
-                title: "Eliminar Rol",
+                title: "Eliminar z",
                 text: "¿Realmente quiere eliminar el Rol?",
                 type: "warning",
                 showCancelButton: true,

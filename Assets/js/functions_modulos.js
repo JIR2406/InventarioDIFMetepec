@@ -134,15 +134,15 @@ function fntViewModulo(idmodulo) {
     }
 }
 
-function fntEditModulo(idpersona) {
+function fntEditModulo(idmodulo) {
     document.querySelector('#titleModal').innerHTML = "Actualizar Modulo";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
 
-    var idpersona = idpersona;
+    var idmodulo = idmodulo;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + 'Modulos/getModulo/' + idpersona;
+    var ajaxUrl = base_url + 'Modulos/getModulo/' + idmodulo;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {

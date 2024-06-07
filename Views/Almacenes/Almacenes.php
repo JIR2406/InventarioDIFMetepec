@@ -30,7 +30,7 @@ getModal('modalAlmacenes', $data);?>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Tipo</th>
+                    <th>Tipo de Almacen</th>
                     <th>Status</th>
                     <th>Acciones</th>
                   </tr>
