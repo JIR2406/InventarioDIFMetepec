@@ -27,6 +27,7 @@ class Usuarios extends Controllers
 
 	public function setUsuario()
 	{
+		$arrResponse = array();
 		if ($_POST) {
 
 			if (empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus'])) {
@@ -43,34 +44,37 @@ class Usuarios extends Controllers
 				$request_user = false;
 				if ($idUsuario == 0) {
 					if ($_SESSION['permisosMod']['w']) {
-					$option = 1;
-					$strPassword = empty($_POST['txtPassword']) ? hash("SHA256", passGenerator()) : hash("SHA256", $_POST['txtPassword']);
-					$request_user = $this->model->insertUsuario($strIdentificacion,
-						$strNombre,
-						$strApellido,
-						$intTelefono,
-						$strEmail,
-						$strPassword,
-						$intTipoId,
-						$intStatus);
+						$option = 1;
+						$strPassword = empty($_POST['txtPassword']) ? hash("SHA256", passGenerator()) : hash("SHA256", $_POST['txtPassword']);
+						$request_user = $this->model->insertUsuario(
+							$strIdentificacion,
+							$strNombre,
+							$strApellido,
+							$intTelefono,
+							$strEmail,
+							$strPassword,
+							$intTipoId,
+							$intStatus
+						);
 					}
 				} else {
 					if ($_SESSION['permisosMod']['u']) {
-					$option = 2;
-					$strPassword = empty($_POST['txtPassword']) ? "" : hash("SHA256", $_POST['txtPassword']);
-					$request_user = $this->model->updateUsuario($idUsuario,
-						$strIdentificacion,
-						$strNombre,
-						$strApellido,
-						$intTelefono,
-						$strEmail,
-						$strPassword,
-						$intTipoId,
-						$intStatus);
+						$option = 2;
+						$strPassword = empty($_POST['txtPassword']) ? "" : hash("SHA256", $_POST['txtPassword']);
+						$request_user = $this->model->updateUsuario(
+							$idUsuario,
+							$strIdentificacion,
+							$strNombre,
+							$strApellido,
+							$intTelefono,
+							$strEmail,
+							$strPassword,
+							$intTipoId,
+							$intStatus
+						);
 					}
 				}
-
-				if ($request_user != 0) {
+				if ($request_user >= 0) {
 					if ($option == 1) {
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 					} else {
@@ -88,7 +92,7 @@ class Usuarios extends Controllers
 	public function getUsuarios()
 	{
 		if ($_SESSION['permisosMod']['r']) {
-	
+
 			$arrData = $this->model->selectUsuarios();
 			for ($i = 0; $i < count($arrData); $i++) {
 
@@ -150,7 +154,7 @@ class Usuarios extends Controllers
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 			}
-		}		
+		}
 		die();
 	}
 
@@ -219,7 +223,7 @@ class Usuarios extends Controllers
 				$strNomFiscal = strClean($_POST['txtNombreFiscal']);
 				$strDirFiscal = strClean($_POST['txtDirFiscal']);
 				$strCfdi = strClean($_POST['txtCfdi']);
-				$request_datafiscal = $this->model->updateDataFiscal($idUsuario, $strNit, $strNomFiscal, $strDirFiscal,$strCfdi);
+				$request_datafiscal = $this->model->updateDataFiscal($idUsuario, $strNit, $strNomFiscal, $strDirFiscal, $strCfdi);
 				if ($request_datafiscal) {
 					sessionUser($_SESSION['idUser']);
 					$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');

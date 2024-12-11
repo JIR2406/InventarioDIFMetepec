@@ -28,43 +28,27 @@ class Almacenes extends Controllers
 	public function setAlmacen()
 	{
 		if ($_POST) {
-/*
-			if (empty($_POST['txtTitulo']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus'])) {
+
+			if (empty($_POST['txtTitulo']) || empty($_POST['txtDescripciona']) || empty($_POST['txtTipo']) || empty($_POST['txtDirecciones'])) {
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			} else {
-				$idalmacen = intval($_POST['idalmacen']);
-				$strTitulo = strClean($_POST['txtTitulo']);
-				$strDescripcion = ucwords(strClean($_POST['txtDescripcion']));
-				$intStatus = intval(strClean($_POST['listStatus']));
-				$request_user = false;
-				if ($idalmacen == 0) {
-					if ($_SESSION['permisosMod']['w']) {
-					$request_user = $this->model->insertModulo($strTitulo,
-						$strDescripcion,
-						$intStatus);
-					$option = 1;
-					}
-				} else {
-					if ($_SESSION['permisosMod']['u']) {
-					$request_user = $this->model->updateModulo($idalmacen,
-						$strTitulo,
-						$strDescripcion,
-						$intStatus);
-					$option = 2;
-					}
+				
+				$strTitulo = ucwords(strClean($_POST['txtTitulo']));
+				$strDescripcion = ucwords(strClean($_POST['txtDescripciona']));
+				$strTipo = ucwords(strClean($_POST['txtTipo']));
+				$strDirecciones = ucwords(strClean($_POST['txtDirecciones']));
+				$request_user = $this->model->insertAlmacen($strTitulo, $strDescripcion,$strTipo,$strDirecciones);
 					
-				}
-				if ($option == 1) {
+				if($request_user == 0){
 					$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-				} else if ($option == 2){
-					$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+				}	else{
+					$arrResponse = array('status' => true, 'msg' => 'No es posible almacenar información.');
+
 				}
-				else if ($request_user == 'exist') {
-					$arrResponse = array('status' => false, 'msg' => '¡Atención! El Rol ya existe.');
-				}
+				
 			}
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-			*/
+			
 		}
 		die();
 	}
@@ -131,16 +115,21 @@ class Almacenes extends Controllers
 		die();
 	}
 
-	public function delModulo($intID)
+	public function delProducto(int $idmodulo)
 	{
-			$intidalmacen = intval($intID);
-			$requestDelete = $this->model->deleteModulo($intidalmacen);
+		if ($_POST) {
+			$intIdmodulo = intval($idmodulo);
+			$observacion = ucwords(strClean($_POST['txtObservacion']));
+			$requestDelete = $this->model->deleteProducto($intIdmodulo, $observacion);
 			if ($requestDelete) {
-				$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario');
+				$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el almacen');
 			} else {
-				$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
+				$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el almacen.');
 			}
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+
+
 		die();
 	}
 

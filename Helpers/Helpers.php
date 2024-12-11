@@ -142,11 +142,7 @@ function token()
     return $token;
 }
 //Formato para valores monetarios
-function formatMoney($cantidad)
-{
-    $cantidad = number_format($cantidad, 2, SPD, SPM);
-    return $cantidad;
-}
+
 
 function getPermisos(int $idmodulo)
 {

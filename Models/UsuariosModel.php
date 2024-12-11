@@ -35,7 +35,7 @@ class UsuariosModel extends Mysql
 		$return = 0;
 
 		$sql = "SELECT * FROM persona WHERE 
-					email_user = '{$this->strEmail}' or indentificacion = '{$this->strIdentificacion}' ";
+					 indentificacion = '{$this->strIdentificacion}' ";
 		$request = $this->select_all($sql);
 
 		if (empty($request)) {
@@ -65,10 +65,11 @@ class UsuariosModel extends Mysql
 		if ($_SESSION['idUser'] != 22) {
 			$admin = "and p.idpersona !=22";
 		}
-		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.status,p.idalmacen,r.nombrerol 
+		$sql = "SELECT p.idpersona,p.indentificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.status,al.nombre idalmacen,r.nombrerol 
 					FROM persona p 
 					INNER JOIN rol r
 					ON p.rolid = r.idrol
+					JOIN almacen al ON p.idalmacen = al.idalmacen
 					WHERE p.status != 0 " . $admin;
 		$request = $this->select_all($sql);
 		return $request;

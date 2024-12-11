@@ -49,15 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "asc"]]
     });
 
-    /*
-    var formModulo = document.querySelector("#formModulo");
-    formModulo.onsubmit = function (e) {
+    var formUsuario = document.querySelector("#formAlmacen");
+    formUsuario.onsubmit = function (e) {
         e.preventDefault();
-        var strTitulo = document.querySelector('#txtTitulo').value;
-        var strDescripcion = document.querySelector('#txtDescripcion').value;
-        var intStatus = document.querySelector('#listStatus').value;
+        var strNombre = document.querySelector('#txtDescripciona').value;
+        var strApellido = document.querySelector('#txtTipo').value;
+        var strEmail = document.querySelector('#txtDirecciones').value;
+        var intTipousuario = document.querySelector('#listStatus').value;
 
-        if (strTitulo == '' || strDescripcion == '' || intStatus == '') {
+        if ( strNombre == '' || strEmail == '' || strApellido == '' || intTipousuario == '') {
             swal("Atención", "Todos los campos son obligatorios.", "error");
             return false;
         }
@@ -71,26 +71,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url + 'Modulos/setModulo';
-        var formData = new FormData(formModulo);
+        var ajaxUrl = base_url + 'Almacenes/setAlmacen';
+        var formData = new FormData(formUsuario);
         request.open("POST", ajaxUrl, true);
-        request.send(formData);        
+        request.send(formData);
+        console.log(request);
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 var objData = JSON.parse(request.responseText);
                 if (objData.status) {
-                    $('#modalFormModulo').modal('hide');
-                    formModulo.reset();
-                    swal("Modulos", objData.msg, "success");
+                    formUsuario.reset();
+                    swal("Almacenes", objData.msg, "success");
                     tableModulos.api().ajax.reload();
+                    $('#modalFormAlmacen').modal('hide');
                 } else {
                     swal("Error", objData.msg, "error");
                 }
             }
         }
 
-    }*/
+    }
+
 }, false);
+
+
 
 
 
@@ -177,38 +181,53 @@ function fntEditModulo(idpersona) {
 
 function fntDelModulo(idmodulo) {
 
-    var idModulo = idmodulo;
-    swal({
-        title: "Eliminar Modulo",
-        text: "¿Realmente quiere eliminar el Modulo?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Si, eliminar!",
-        cancelButtonText: "No, cancelar!",
-        closeOnConfirm: false,
-        closeOnCancel: true
-    }, function (isConfirm) {
+    $('#modalFormBorrar').modal('show');
 
-        if (isConfirm) {
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url + 'Modulos/delModulo/'+idModulo;
-            request.open("POST", ajaxUrl, true);
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send();
-            console.log(request);
-            request.onreadystatechange = function () {
-                if (request.readyState == 4 && request.status == 200) {
-                    var objData = JSON.parse(request.responseText);
-                    if (objData.status) {
-                        swal("Eliminar!", objData.msg, "success");
-                    } else {
-                        swal("Atención!", objData.msg, "error");
-                    }
+    var formModuloE = document.querySelector("#formEProductos");
+
+    formModuloE.onsubmit = function (e) {
+        e.preventDefault();
+        var strTitulo = document.querySelector('#txtObservacion').value;
+        if (strTitulo == '') {
+            swal("Atención", "Todos los campos son obligatorios.", "error");
+            return false;
+        }
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
+            }
+        }
+        console.log(formModuloE);
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url + 'Almacenes/delProducto/'+idmodulo;
+        var formData = new FormData(formModuloE);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        console.log(request);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                    $('#formEProductos').modal('hide');
+                    formModuloE.reset();
+                    swal("Productos", objData.msg, "success");
                     tableModulos.api().ajax.reload();
+                    $('#modalFormBorrar').modal('hide');
+
+                } else {
+                    swal("Error", objData.msg, "error");
                 }
             }
         }
 
-    });
+    }
+
+
 
 }
+
+
+
+

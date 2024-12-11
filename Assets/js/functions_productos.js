@@ -12,94 +12,207 @@ function openModal() {
 
 }
 
-if (document.querySelector(".btnAddImage")) {
-    let btnAddImage = document.querySelector(".btnAddImage");
-    btnAddImage.onclick = function (e) {
-        let key = Date.now();
-        let newElement = document.createElement("div");
-        newElement.id = "div" + key;
-        newElement.innerHTML = `
-         <div class="prevImage"></div>
-         <input type="file" name="foto" id="img${key}" class="inputUploadfile">
-         <label for="img${key}" class="btnUploadfile"><i class="fas fa-upload "></i></label>
-         <button class="btnDeleteImage notblock" type="button" onclick="fntDelItem('#div${key}')"><i class="fas fa-trash-alt"></i></button>`;
-        document.querySelector("#containerImages").appendChild(newElement);
-        document.querySelector("#div" + key + " .btnUploadfile").click();
-        fntInputFile();
-    }
-}
 
-function fntDelItem(element) {
-    let nameImg = document.querySelector(element + ' .btnDeleteImage').getAttribute("imgname");
-    let idProducto = document.querySelector("#idProducto").value;
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    //let ajaxUrl = base_url + 'Productos/delFile';
+var tableProductos;
+document.addEventListener('DOMContentLoaded', function () {
 
-    /*let formData = new FormData();
-    formData.append('idproducto', idProducto);
-    formData.append("file", nameImg);
-    request.open("POST", ajaxUrl, true);
-    request.send(formData);
-    request.onreadystatechange = function () {
-        if (request.readyState != 4) return;
-        if (request.status == 200) {
-            let objData = JSON.parse(request.responseText);
-            if (objData.status) {
-            */    let itemRemove = document.querySelector(element);
-                itemRemove.parentNode.removeChild(itemRemove);
-            //} else {
-              //  swal("", objData.msg, "error");
-            //}
-        //}
-    //}
-}
+    tableProductos = $('#tableProductos').dataTable({
+        "aProcessing": true,
+        "aServerSide": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax": {
+            "url": base_url + "Productos/getProductos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "idproducto" },
+            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "categoriaid" },
+            { "data": "unidades" },
+            { "data": "idalmacen" },
+            { "data": "status" },
+            { "data": "options" }
+        ],
+        'dom': 'lBfrtip',
+        'buttons': [
+            {
+                "extend": "copyHtml5",
+                "text": "<i class='far fa-copy'></i> Copiar",
+                "titleAttr": "Copiar",
+                "className": "btn btn-secondary"
+            }, {
+                "extend": "excelHtml5",
+                "text": "<i class='fas fa-file-excel'></i> Excel",
+                "titleAttr": "Esportar a Excel",
+                "className": "btn btn-success"
+            }, {
+                "extend": "pdfHtml5",
+                "text": "<i class='fas fa-file-pdf'></i> PDF",
+                "titleAttr": "Esportar a PDF",
+                "className": "btn btn-danger"
+            }, {
+                "extend": "csvHtml5",
+                "text": "<i class='fas fa-file-csv'></i> CSV",
+                "titleAttr": "Esportar a CSV",
+                "className": "btn btn-info"
+            }
+        ],
+        "resonsieve": "true",
+        "bDestroy": true,
+        "iDisplayLength": 5,
+        "order": [[0, "asc"]]
+    });
 
-function fntInputFile(){
-    let inputUploadfile = document.querySelectorAll(".inputUploadfile");
-    inputUploadfile.forEach(function(inputUploadfile) {
-        inputUploadfile.addEventListener('change', function(){
-            let idProducto = document.querySelector("#idProducto").value;
-            let parentId = this.parentNode.getAttribute("id");
-            let idFile = this.getAttribute("id");            
-            let uploadFoto = document.querySelector("#"+idFile).value;
-            let fileimg = document.querySelector("#"+idFile).files;
-            let prevImg = document.querySelector("#"+parentId+" .prevImage");
-            let nav = window.URL || window.webkitURL;
-            if(uploadFoto !=''){
-                let type = fileimg[0].type;
-                let name = fileimg[0].name;
-                if(type != 'image/jpeg' && type != 'image/jpg' && type != 'image/png'){
-                    prevImg.innerHTML = "Archivo no válido";
-                    uploadFoto.value = "";
-                    return false;
-                }else{
-                    let objeto_url = nav.createObjectURL(this.files[0]);
-                    prevImg.innerHTML = `<img class="loading" src="${base_url}Assets/images/loading.svg" >`;
+    var formModulo = document.querySelector("#formProductos");
+    formModulo.onsubmit = function (e) {
+        e.preventDefault();
+        var strTitulo = document.querySelector('#txtTitulo').value;
+        var strDescripcion = document.querySelector('#txtDescripcion').value;
+        var strCategoria = document.querySelector('#txtCategoria').value;
+        var strUnidades = document.querySelector('#txtUnidades').value;
+        var strAlmacen = document.querySelector('#txtAlmacen').value;
+        var intStatus = document.querySelector('#listStatus').value;
 
-                    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url+'Productos/setImage'; 
-                    let formData = new FormData();
-                    formData.append('idproducto',idProducto);
-                    formData.append("foto", this.files[0]);
-                    request.open("POST",ajaxUrl,true);
-                    request.send(formData);
-                    console.log(request);
-                    
-                    request.onreadystatechange = function(){
-                        if(request.readyState != 4) return;
-                        if(request.status == 200){
-                            let objData = JSON.parse(request.responseText);
-                            if(objData.status){
-                                prevImg.innerHTML = `<img src="${objeto_url}">`;
-                            }else{
-                                swal("Error", objData.msg , "error");
-                            }
-                        }
-                    }
+        if (strTitulo == '' || strDescripcion == '' || intStatus == '' || strCategoria == '' || strUnidades == '' || strAlmacen == '') {
+            swal("Atención", "Todos los campos son obligatorios.", "error");
+            return false;
+        }
 
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
+            }
+        }
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url + 'Productos/setProducto';
+        var formData = new FormData(formModulo);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        console.log(request);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                console.log(objData.status);
+                if (objData.status) {
+                    $('#modalFormEProductos').modal('hide');
+                    formModulo.reset();
+                    swal("Productos", objData.msg, "success");
+                    tableModulos.api().ajax.reload();
+                } else {
+                    swal("Error", objData.msg, "error");
                 }
             }
+        }
 
-        });
-    });
+    }
+
+
+}, false);
+
+function fntDelProducto(idmodulo) {
+
+    $('#modalFormBorrar').modal('show');
+
+    var formModuloE = document.querySelector("#formEProductos");
+
+    formModuloE.onsubmit = function (e) {
+        e.preventDefault();
+        var strTitulo = document.querySelector('#txtObservacion').value;
+        if (strTitulo == '') {
+            swal("Atención", "Todos los campos son obligatorios.", "error");
+            return false;
+        }
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
+            }
+        }
+        console.log(formModuloE);
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url + 'Productos/delProducto/'+idmodulo;
+        var formData = new FormData(formModuloE);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        console.log(request);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                    $('#formEProductos').modal('hide');
+                    formModuloE.reset();
+                    swal("Productos", objData.msg, "success");
+                    tableProductos.api().ajax.reload();
+                    $('#modalFormBorrar').modal('hide');
+
+                } else {
+                    swal("Error", objData.msg, "error");
+                }
+            }
+        }
+
+    }
+
+
+
 }
+
+function fntUpdProducto(idmodulo) {
+
+    $('#modalFormActualizar').modal('show');
+
+    var formModuloA = document.querySelector("#formAProductos");
+
+    formModuloA.onsubmit = function (e) {
+        e.preventDefault();
+        var strTitulo = document.querySelector('#txtSalida').value;
+        if (strTitulo == '') {
+            swal("Atención", "Todos los campos son obligatorios.", "error");
+            return false;
+        }
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
+            }
+        }
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url + 'Productos/updateProducto/'+idmodulo;
+        var formData = new FormData(formModuloE);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        console.log(request);
+
+        /*
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                    $('#formEProductos').modal('hide');
+                    formModuloE.reset();
+                    swal("Productos", objData.msg, "success");
+                    tableProductos.api().ajax.reload();
+                    $('#modalFormBorrar').modal('hide');
+
+                } else {
+                    swal("Error", objData.msg, "error");
+                }
+            }
+        }*/
+
+    }
+
+
+
+}
+
+

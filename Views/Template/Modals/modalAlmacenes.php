@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="formAlmacen" name="formModulo" class="form-horizontal">
+        <form id="formAlmacen" name="formAlmacen" class="form-horizontal">
           <input type="hidden" id="idModulo" name="idModulo" value="">
           <p class="text-primary">Todos los campos son obligatorios.</p>
           <div class="form-row">
@@ -18,18 +18,18 @@
               <input type="text" class="form-control valid validText" id="txtTitulo" name="txtTitulo" required="">
             </div>
             <div class="form-group col-md-6">
-              <label for="txtDescripcion">Descripción</label>
-              <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="">
+              <label for="txtDescripciona">Descripción</label>
+              <input type="text" class="form-control valid validText" id="txtDescripciona" name="txtDescripciona" required="">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="txtT">Tipo</label>
-              <input type="text" class="form-control valid validText" id="txtTitulo" name="txtTitulo" required="">
+              <label for="txtTipo">Tipo</label>
+              <input type="text" class="form-control valid validText" id="txtTipo" name="txtTipo" required="">
             </div>
             <div class="form-group col-md-6">
-              <label for="txtDescripcion">Dirección</label>
-              <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="">
+              <label for="txtDirecciones">Dirección</label>
+              <input type="text" class="form-control valid validText" id="txtDirecciones" name="txtDirecciones" required="">
             </div>
           </div>
           <div class="form-row">
@@ -90,6 +90,39 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalFormBorrar" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header headerRegister">
+        <h5 class="modal-title" id="titleModal">Eliminar almacen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formEProductos" name="formEProductos" class="form-horizontal">
+          <input type="hidden" id="idModulo" name="idModulo" value="">
+          <div class="form-group">
+            <label for="txtObservacion">Observación</label>
+            <input type="text" class="form-control" id="txtObservacion" name="txtObservacion" required>
+            <small class="form-text text-muted">Todos los campos son obligatorios.</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-times-circle"></i> Cancelar
+        </button>
+        <button type="submit" form="formEProductos" class="btn btn-primary">
+          <i class="fa fa-check-circle"></i> Aceptar
+        </button>
       </div>
     </div>
   </div>

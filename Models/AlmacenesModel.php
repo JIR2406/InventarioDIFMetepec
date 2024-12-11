@@ -11,30 +11,32 @@ class AlmacenesModel extends Mysql
 		parent::__construct();
 	}
 
-	public function insertModulo(string $titulo, string $descripcion, int $status)
+	public function insertAlmacen(string $titulo, string $descripcion, string $strTipo, string $strDirecciones)
 	{
 		$this->strTitulo = $titulo;
 		$this->strDescripcion = $descripcion;
-		$this->intStatus = $status;
+		
 		$return = 0;
 
-		$sql = "SELECT * FROM modulo WHERE 
-					titulo = '{$this->strTitulo}'";
+		$sql = "SELECT COUNT(*) AS NA FROM almacen";
 		$request = $this->select_all($sql);
-		if (!empty($request) == 0) {
-			$query_insert = "INSERT INTO modulo(titulo,descripcion,status) 
-								  VALUES(?,?,?)";
+		$status = 1;
+		$incremento = $request[0]['NA'] + 1;
+			$query_insert = "INSERT INTO almacen(idalmacen, nombre,descripcion,tipo,direccion,status) 
+								  VALUES(?,?,?,?,?,?)";
 			$arrData = array(
+				$incremento,
 				$this->strTitulo,
 				$this->strDescripcion,
-				$this->intStatus
+				$strTipo,
+				$strDirecciones,
+				$status
 			);
 			$request_insert = $this->insert($query_insert, $arrData);
+
 			$return = $request_insert;
-		} else {
-			$return = "exist";
-		}
-		return $return;
+
+			return $return;
 	}
 
 	public function selectAlmacenes()
@@ -74,12 +76,13 @@ class AlmacenesModel extends Mysql
 		$request = $this->update($sql, $arrData);
 		return $request;
 	}
-	public function deleteModulo(int $intIdmodulo)
-	{
-		$this->intIdModulo = $intIdmodulo;
-		$sql = "UPDATE modulo SET status = ? WHERE idmodulo = ?";
-		$arrData = array(0, $this->intIdModulo);
-		$request = $this->update($sql, $arrData);
-		return $request;
-	}
+	public function deleteProducto(int $intIdmodulo, string $comentario)
+    {
+        $intProducto = $intIdmodulo;
+        $comentario = $comentario;
+        $sql = "UPDATE almacen SET status = ?, observacion= ? WHERE idalmacen = ?";
+        $arrData = array(0, $comentario, $intProducto);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
 }
